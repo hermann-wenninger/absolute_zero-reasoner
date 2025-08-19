@@ -3,14 +3,20 @@ mod metadata;
 mod db;
 mod controller;
 
-use anyhow::Result;
+//use anyhow::Result;
+use qdrant_client::Qdrant;
+use qdrant_client::config::QdrantConfig;
 
 #[tokio::main]
-async fn main() -> Result<()> {
-    println!("🚀 Absolute-Zero Rust Runtime gestartet...");
+async fn main() -> anyhow::Result<()> {
+    // Config bauen
+    let config = QdrantConfig::from_url("http://localhost:6333");
+    
+    // Client erstellen
+    let _client = Qdrant::new(config)?;
 
-    // Controller starten (koordiniert die Multithreads)
-    controller::run().await?;
+    // Beispiel: Client-Info ausgeben
+    println!("Qdrant-Client verbunden!");
 
     Ok(())
 }

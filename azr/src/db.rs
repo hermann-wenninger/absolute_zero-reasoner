@@ -1,22 +1,16 @@
-use qdrant_client::qdrant::vectors_config::Config;
-use qdrant_client::{prelude::*, qdrant::*};
-use anyhow::Result;
 
-pub async fn init_db() -> Result<QdrantClient> {
-    let config = QdrantClientConfig::from_url("http://localhost:6333");
-    let client = QdrantClient::new(Some(config))?;
+  
+use qdrant_client::Qdrant;
+use qdrant_client::config::QdrantConfig; // <-- richtige Imports
 
-    // Collection erzeugen, falls nicht vorhanden
-    client.create_collection(&CreateCollection {
-        collection_name: "compilations".into(),
-        vectors_config: Some(VectorsConfig {
-            config: Some(Config::Params(VectorParams {
-                size: 512,
-                distance: Distance::Cosine.into(),
-            })),
-        }),
-        ..Default::default()
-    }).await?;
+pub async fn init_db() -> anyhow::Result<Qdrant> {
+    // URL ggf. aus ENV lesen
+    let url = std::env::var("QDRANT_URL").unwrap_or_else(|_| "http://localhost:6333".into());
 
+    // Config bauen (optional mit API-Key etc.)
+    let config = QdrantConfig::from_url(&url);
+    // .with_api_key("dein_api_key") // falls nötig
+
+    let client = Qdrant::new(config)?;
     Ok(client)
 }
