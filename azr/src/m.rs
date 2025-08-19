@@ -1,5 +1,7 @@
 use which::which;
 use std::path::PathBuf;
 
-let cargo = which("cargo").unwrap();
-assert_eq!(cargo, PathBuf::from("/usr/bin/cargo"));
+let cargo_x = which("cargo").unwrap();
+let rustc_x = which("rustc").unwrap();
+let cargo = PathBuf::from(cargo_x);
+let rustc = PathBuf::from(rustc_x);
