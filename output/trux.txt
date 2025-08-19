@@ -1,0 +1,13 @@
+┌────────────┐
+│  LLM KI    │  <─ entscheidet Tasks (Code erzeugen, ändern, kompilieren)
+└─────┬──────┘
+      │
+      ▼
+┌────────────┐       ┌──────────────┐
+│ Code-Worker│  <──> │ Cargo/Rustc  │
+└─────┬──────┘       └───────┬──────┘
+      │                      │||||||
+      ▼                      ▼
+┌────────────┐       ┌──────────────┐
+│ Log-Parser │  ───> │ Vektor-DB    │ (Qdrant, Weaviate …)
+└────────────┘       └──────────────┘
