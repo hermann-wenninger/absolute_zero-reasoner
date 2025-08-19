@@ -16,3 +16,4 @@ tokio-process = "0.2"
 
 # Vektor-Datenbank: als Beispiel Qdrant
 qdrant-client = "1.9.0"
+chrono = "0.4.41"
