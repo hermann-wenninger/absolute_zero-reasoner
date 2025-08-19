@@ -1,0 +1,245 @@
+{
+  "command": "build",
+  "target": "lib1",
+  "options": ["--release"]
+}
+{
+  "command": "test",
+  "target": "lib2",
+  "options": ["--verbose"]
+}
+{
+  "command": "deploy",
+  "target": "prod",
+  "options": ["--force", "--no-cache"]
+}
+{
+  "command": "lint",
+  "target": "all",
+  "options": ["--fix"]
+}
+{
+  "command": "format",
+  "target": "src",
+  "options": ["--write"]
+}
+{
+  "command": "clean",
+  "target": "dist",
+  "options": ["--all"]
+}
+{
+  "command": "serve",
+  "target": "dev",
+  "options": ["--hot", "--open"]
+}
+{
+  "command": "generate",
+  "target": "component",
+  "options": ["--name", "header"]
+}
+{
+  "command": "migrate",
+  "target": "database",
+  "options": ["--up", "--dry-run"]
+}
+{
+  "command": "bundle",
+  "target": "assets",
+  "options": ["--minify", "--source-map"]
+}
+{
+  "command": "watch",
+  "target": "src",
+  "options": ["--poll"]
+}
+{
+  "command": "publish",
+  "target": "npm",
+  "options": ["--access", "public"]
+}
+{
+  "command": "rollback",
+  "target": "last-deployment",
+  "options": ["--confirm"]
+}
+{
+  "command": "snapshot",
+  "target": "current-state",
+  "options": ["--label", "backup"]
+}
+{
+  "command": "status",
+  "target": "system",
+  "options": ["--verbose"]
+}
+{
+  "command": "optimize",
+  "target": "performance",
+  "options": ["--level", "high"]
+}
+{
+  "command": "validate",
+  "target": "config",
+  "options": ["--strict"]
+}
+{
+  "command": "sync",
+  "target": "remote",
+  "options": ["--force", "--no-verify"]
+}
+{
+  "command": "archive",
+  "target": "logs",
+  "options": ["--compress", "--encrypt"]
+}
+{
+  "command": "backup",
+  "target": "data",
+  "options": ["--incremental", "--notify"]
+}
+{
+  "command": "restore",
+  "target": "last-backup",
+  "options": ["--confirm"]
+}
+{
+  "command": "analyze",
+  "target": "codebase",
+  "options": ["--metrics", "--report"]
+}
+{
+  "command": "configure",
+  "target": "settings",
+  "options": ["--env", "production"]
+}
+{
+  "command": "export",
+  "target": "data",
+  "options": ["--format", "json"]
+}
+{
+  "command": "import",
+  "target": "data",
+  "options": ["--source", "file"]
+}
+{
+  "command": "notify",
+  "target": "team",
+  "options": ["--message", "Deployment successful"]
+}
+{
+  "command": "cleanup",
+  "target": "temp-files",
+  "options": ["--older-than", "7d"]
+}
+{
+  "command": "schedule",
+  "target": "task",
+  "options": ["--cron", "0 0 * * *"]
+}
+{
+  "command": "review",
+  "target": "pull-request",
+  "options": ["--approve"]
+}
+{
+  "command": "merge",
+  "target": "feature-branch",
+  "options": ["--squash"]
+}
+{
+  "command": "create",
+  "target": "issue",
+  "options": ["--title", "Bug in module X", "--assignee", "user123"]
+}
+{
+  "command": "assign",
+  "target": "task",
+  "options": ["--to", "team-member"]
+}
+{
+  "command": "archive",
+  "target": "old-projects",
+  "options": ["--include", "*.old"]
+}
+{
+  "command": "fetch",
+  "target": "updates",
+  "options": ["--all"]
+}
+{
+  "command": "reset",
+  "target": "local-changes",
+  "options": ["--hard"]
+}
+{
+  "command": "diff",
+  "target": "last-commit",
+  "options": ["--stat"]
+}
+{
+  "command": "checkout",
+  "target": "branch",
+  "options": ["--track", "origin/feature"]
+}
+{
+  "command": "rebase",
+  "target": "main",
+  "options": ["--interactive"]
+}
+{
+  "command": "cherry-pick",
+  "target": "commit",
+  "options": ["--no-commit"]
+}
+{
+  "command": "stash",
+  "target": "changes",
+  "options": ["--include-untracked"]
+}
+{
+  "command": "apply",
+  "target": "stash",
+  "options": ["--index"]
+}
+{
+  "command": "tag",
+  "target": "release",
+  "options": ["--annotate", "--message", "v1.0.0"]
+}
+{
+  "command": "push",
+  "target": "origin",
+  "options": ["--set-upstream"]
+}
+{
+  "command": "pull",
+  "target": "latest-changes",
+  "options": ["--rebase"]
+}
+{
+  "command": "status",
+  "target": "repository",
+  "options": ["--short"]
+}
+{
+  "command": "log",
+  "target": "history",
+  "options": ["--oneline", "--graph"]
+}
+{
+  "command": "init",
+  "target": "repository",
+  "options": ["--bare"]
+}
+{
+  "command": "clone",
+  "target": "repository",
+  "options": ["--depth", "1"]
+}
+{
+  "command": "remote",
+  "target": "add",
+  "options": ["origin", "3"]
+}

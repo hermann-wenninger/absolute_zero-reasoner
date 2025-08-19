@@ -1,12 +1,18 @@
 [package]
-name = "azr"
+name = "azr_runtime"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
-anyhow = "1"
+tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tempfile = "3"
-tokio = { version = "1.47", features = ["rt-multi-thread", "macros", "process", "time"] }
-which = "8.0.0"
+uuid = { version = "1", features = ["v4"] }
+anyhow = "1"
+thiserror = "1"
+
+# Für Prozessausführung (cargo, rustc)
+tokio-process = "0.2"
+
+# Vektor-Datenbank: als Beispiel Qdrant
+qdrant-client = "1.9.0"
