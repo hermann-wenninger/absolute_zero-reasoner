@@ -11,8 +11,8 @@ pub async fn run() -> Result<()> {
 
     // Beispiel: mehrere Projekte parallel kompilieren
     let projects = vec![
-        "examples/project1",
-        "examples/project2",
+        "programm_data/pro_1",
+        "programm_data/pro_2",
     ];
 
     let mut handles = vec![];
