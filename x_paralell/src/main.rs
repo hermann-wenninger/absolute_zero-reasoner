@@ -17,5 +17,9 @@ thread::spawn(move|| {
          println!("Numbers B: {:?}", numbers_b);
        
     }).join().unwrap(); 
+    let x = Box::leak(Box::new(42));
+    dbg!("X: {}", &x);
+    
+    println!("{}", &x);
 }
 
