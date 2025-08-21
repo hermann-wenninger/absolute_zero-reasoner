@@ -6,10 +6,9 @@ fn main() {
     let t1 = thread::spawn(move||{
         let len =numbers.len();
         let sum = numbers.iter().sum::<i32>();
-        println!("Summe der Zahlen: {}", sum);
-        println!("Anzahl der Zahlen: {}", len);
-        let durchschnitt = sum as f64 / len as f64;
-        println!("Durchschnitt: {}", durchschnitt);
+      
+        sum as f64 / len as f64
+     
         
     }).join().unwrap();
     thread::sleep(Duration::from_secs(1));
