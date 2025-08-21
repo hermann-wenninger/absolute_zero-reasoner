@@ -9,13 +9,13 @@ fn main() {
 thread::spawn(move|| {
        numbers_a.push(42);
        println!("Numbers A: {:?}", numbers_a);
-    }); 
+    }).join().unwrap();
 
 
     thread::spawn(move|| {
        numbers_b.push(44);
          println!("Numbers B: {:?}", numbers_b);
        
-    }); 
+    }).join().unwrap(); 
 }
 
