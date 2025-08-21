@@ -8,11 +8,12 @@ thread::scope(|s| {
         println!("Länge: {}", numbers.len()); 
     }); 
 
-    
+
     s.spawn(|| {
-        for n in &numbers { 
-            println!("{n}"); 
-        } 
+       numbers.push(44);
+        //is numbers a reference or a copy?
+        //how can i test it?
+        //thread::sleep(Duration::from_secs(1));
     }); 
 });
 }
