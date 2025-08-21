@@ -1,32 +1,18 @@
 use std::thread;
 use std::time::Duration;
 
-
-
-   
-
 fn main() {
-    let numbers = vec![1, 2, 3, 4, 5,6, 7, 8, 9, 10,11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    let mut odd = vec![];
-    let mut even = vec![];
-    thread::spawn(move||{
-        for n in numbers{
-            if n % 2 == 0 {
-                even.push(n);
-            } else {
-                odd.push(n);
-            }
-        }
-    println!("Odd numbers: {:?}", &odd);
-    println!("Even numbers: {:?}", &even);
-    })
-    .join()
-    .expect("Thread panicked");
-   
+    let numbers = Vec::from_iter(1..=500);
+    let t1 = thread::spawn(move||{
+        let len =numbers.len();
+        let sum = numbers.iter().sum::<i32>();
+        println!("Summe der Zahlen: {}", sum);
+        println!("Anzahl der Zahlen: {}", len);
+        let durchschnitt = sum as f64 / len as f64;
+        println!("Durchschnitt: {}", durchschnitt);
+        
+    }).join().unwrap();
     thread::sleep(Duration::from_secs(1));
-    println!("Main thread finished.");
-    // This is a simple example of using threads to process a vector of numbers.
-    // The main thread creates a new thread to separate odd and even numbers.
-    // The results are printed after the thread completes its execution.
+    println!("{:?}",t1);
 }
-// This code demonstrates basic thread usage in Rust, including spawning a thread and waiting for it to
+
