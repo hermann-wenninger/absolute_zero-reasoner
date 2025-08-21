@@ -1,20 +1,21 @@
 use std::thread;
+//use std::rc::Rc;
 //use std::time::Duration;
+//use std::sync::Arc;
 
 fn main() {
-    let numbers = Vec::from_iter(1..=500);
-thread::scope(|s| {
-    s.spawn(|| {
-        println!("Länge: {}", numbers.len()); 
+    let mut numbers_a = Vec::from_iter(1..=5);
+    let mut numbers_b = Vec::from_iter(6..=10);
+thread::spawn(move|| {
+       numbers_a.push(42);
+       println!("Numbers A: {:?}", numbers_a);
     }); 
 
 
-    s.spawn(|| {
-       numbers.push(44);
-        //is numbers a reference or a copy?
-        //how can i test it?
-        //thread::sleep(Duration::from_secs(1));
+    thread::spawn(move|| {
+       numbers_b.push(44);
+         println!("Numbers B: {:?}", numbers_b);
+       
     }); 
-});
 }
 
