@@ -1,25 +1,28 @@
 use std::thread;
 //use std::rc::Rc;
 //use std::time::Duration;
-//use std::sync::Arc;
+use std::sync::Arc;
 
 fn main() {
-    let mut numbers_a = Vec::from_iter(1..=5);
-    let mut numbers_b = Vec::from_iter(6..=10);
-thread::spawn(move|| {
-       numbers_a.push(42);
-       println!("Numbers A: {:?}", numbers_a);
-    }).join().unwrap();
+    let mut numbers_a = Arc::new(Vec::from_iter(1..=5));
+    let mut numbers_b = numbers_a.clone();
 
+   //create two threads in a for loop
+    for i in 0..2 {
+        let numbers = if i == 0 { &numbers_a } else { &numbers_b };
+        let numbers = Arc::clone(numbers);
+        
+        thread::spawn(move || {
+            for number in numbers.iter() {
+                println!("Thread {}: {}", i, number);
+                //thread::sleep(Duration::from_millis(100));
+            }
+        });
+    }
 
-    thread::spawn(move|| {
-       numbers_b.push(44);
-         println!("Numbers B: {:?}", numbers_b);
-       
-    }).join().unwrap(); 
-    let x = Box::leak(Box::new(42));
-    dbg!("X: {}", &x);
-    
-    println!("{}", &x);
+    // Wait for threads to finish
+    thread::sleep(std::time::Duration::from_secs(1));
+    println!("All threads completed.");
+
 }
 
