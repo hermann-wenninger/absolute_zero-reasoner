@@ -56,7 +56,7 @@ fn handle_client(mut stream: TcpStream) {
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").expect("Konnte Port nicht binden");
-    println!("Server läuft auf http://127.0.0.1:7878 ...");
+    println!("Server läuft auf http://127.0.0.1:7878 so dahin");
 
     for stream in listener.incoming() {
         match stream {
