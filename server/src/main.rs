@@ -8,26 +8,49 @@ fn handle_client(mut stream: TcpStream) {
         let request = String::from_utf8_lossy(&buffer[..]);
         println!("Anfrage erhalten:\n{}", request);
 
-        // Hier ein einfacher HTML-Body
-        let body = "<!DOCTYPE html><html><body><h1>Hallo, Welt!</h1></body></html>";
+        // Erste Zeile extrahieren (z.B. "GET /hello HTTP/1.1")
+        let request_line = request.lines().next().unwrap_or("");
+        let mut parts = request_line.split_whitespace();
+        let method = parts.next().unwrap_or("");
+        let path = parts.next().unwrap_or("");
 
-        // Content-Length berechnen (in Bytes)
-        let length = body.len();
+        // Default-Body (falls nichts passt)
+        let mut status = "200 OK";
+        let mut body = "<h1>Seite nicht gefunden</h1>";
+        let mut content_type = "text/html; charset=UTF-8";
 
-        // Vollständige HTTP-Antwort mit Headern
+        // Router: Methode + Pfad
+        match (method, path) {
+            ("GET", "/") => {
+                body = "<h1>Willkommen auf der Startseite!</h1>";
+            }
+            ("GET", "/hello") => {
+                body = "<h1>Hallo!</h1>";
+            }
+            ("GET", "/json") => {
+                body = r#"{ "status": "ok", "message": "Hallo aus JSON" }"#;
+                content_type = "application/json; charset=UTF-8";
+            }
+            _ => {
+                status = "404 Not Found";
+            }
+        }
+
         let response = format!(
-            "HTTP/1.1 200 OK\r\n\
-             Content-Type: text/html; charset=UTF-8\r\n\
+            "HTTP/1.1 {}\r\n\
+             Content-Type: {}\r\n\
              Content-Length: {}\r\n\
              Connection: close\r\n\
              \r\n\
              {}",
-            length, body
+            status,
+            content_type,
+            body.len(),
+            body
         );
 
         stream.write_all(response.as_bytes()).unwrap();
         stream.flush().unwrap();
-        // Verbindung wird durch `Connection: close` und stream-Ende sauber beendet
     }
 }
 
