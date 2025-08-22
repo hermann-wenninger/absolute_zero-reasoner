@@ -8,31 +8,38 @@ fn handle_client(mut stream: TcpStream) {
         let request = String::from_utf8_lossy(&buffer[..]);
         println!("Anfrage erhalten:\n{}", request);
 
-        // Erste Zeile extrahieren (z.B. "GET /hello HTTP/1.1")
+        // Erste Zeile extrahieren (z.B. "GET /hello/Hermann HTTP/1.1")
         let request_line = request.lines().next().unwrap_or("");
         let mut parts = request_line.split_whitespace();
         let method = parts.next().unwrap_or("");
         let path = parts.next().unwrap_or("");
 
-        // Default-Body (falls nichts passt)
         let mut status = "200 OK";
-        let mut body = "<h1>Seite nicht gefunden</h1>";
+        let mut body = String::from("<h1>Seite nicht gefunden</h1>");
         let mut content_type = "text/html; charset=UTF-8";
 
-        // Router: Methode + Pfad
         match (method, path) {
             ("GET", "/") => {
-                body = "<h1>Willkommen auf der Startseite!</h1>";
-            }
-            ("GET", "/hello") => {
-                body = "<h1>Hallo!</h1>";
+                body = "<h1>Willkommen auf der Startseite!</h1>".to_string();
             }
             ("GET", "/json") => {
-                body = r#"{ "status": "ok", "message": "Hallo aus JSON" }"#;
+                body = r#"{ "status": "ok", "message": "Hallo aus JSON" }"#.to_string();
                 content_type = "application/json; charset=UTF-8";
             }
             _ => {
-                status = "404 Not Found";
+                // Jetzt prüfen wir dynamische Routen
+                if path.starts_with("/hello/") {
+                    // Alles nach "/hello/" abschneiden → Name
+                    let name = &path["/hello/".len()..];
+                    if !name.is_empty() {
+                        body = format!("<h1>Hallo, {}!</h1>", name);
+                    } else {
+                        status = "400 Bad Request";
+                        body = "<h1>Fehler: Kein Name angegeben!</h1>".to_string();
+                    }
+                } else {
+                    status = "404 Not Found".into();
+                }
             }
         }
 
@@ -56,7 +63,7 @@ fn handle_client(mut stream: TcpStream) {
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").expect("Konnte Port nicht binden");
-    println!("Server läuft auf http://127.0.0.1:7878 so dahin");
+    println!("Server läuft auf http://127.0.0.1:7878 ...");
 
     for stream in listener.incoming() {
         match stream {
