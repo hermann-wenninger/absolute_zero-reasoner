@@ -1,3 +1,4 @@
 venv
 azr/target/debug
 x_paralell/target
+server/target
