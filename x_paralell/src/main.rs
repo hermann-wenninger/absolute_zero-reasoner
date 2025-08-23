@@ -15,7 +15,12 @@ fn main() {
             println!("Thraed hat arc_gard auf {} gesetzt", *arc_guard);
             println!("Thread hat gaerd auf {} gesetzt",  *guard);
             thread::sleep(Duration::from_millis(1));
-        });
+            drop(guard);
+            drop(arc_guard);
+        }
+     
+    );
+       
     }
    })
 }
