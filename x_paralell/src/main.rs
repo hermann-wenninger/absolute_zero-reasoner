@@ -11,7 +11,8 @@ fn main() {
                     *guard += 1;
                     println!("Zwischenschritt: {}", *guard);
                 }
-                thread::sleep(Duration::from_secs(1)); // New!
+                drop(guard);
+                thread::sleep(Duration::from_millis(100)); // New!
             });
         }
     });
