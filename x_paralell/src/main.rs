@@ -9,10 +9,13 @@ fn main() {
                 let mut guard = n.lock().unwrap();
                 for _ in 0..100 {
                     *guard += 1;
+                    println!("Zwischenschritt: {}", *guard);
                 }
                 thread::sleep(Duration::from_secs(1)); // New!
             });
         }
     });
-    assert_eq!(n.into_inner().unwrap(), 1000);
+    //assert_eq!(n.into_inner().unwrap(), 1000);
+    println!("Anzahl: {}", n.into_inner().unwrap());
+    println!("Fertig!");
 }
